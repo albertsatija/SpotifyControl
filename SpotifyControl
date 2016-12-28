@@ -19,6 +19,7 @@ on run argv
   set msg to msg & "  volume N, up, down                - Set Volume to N (0...100)\n"
   set msg to msg & "  increasevolume N                  - Increment Volume by N (0...100)\n"
   set msg to msg & "  decreasevolume N                  - Decrement Volume by N (0...100)\n"
+  set msg to msg & "  uri                               - Get Track Uri\n"
 
   set waitFlag to false 
 
@@ -205,6 +206,13 @@ on run argv
         if repeating then set info to info & "\n Repeat is on."
       end tell
       return info
+    -- URI
+    else if command is equal to "uri" then
+      tell application "Spotify"
+        set uri to spotify url of current track
+      end tell
+      return uri
+      
     else
       log "\nCommand not recognized!\n"
       return msg
